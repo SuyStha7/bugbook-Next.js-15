@@ -77,7 +77,7 @@ export async function signUp(
       sessionCookie.attributes,
     );
 
-    return redirect("/");
+    return redirect("/login");
   } catch (error) {
     if (isRedirectError(error)) throw error;
     console.error(error);
