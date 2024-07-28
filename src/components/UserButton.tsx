@@ -7,13 +7,17 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import UserAvatar from "./UserAvatar";
 import Link from "next/link";
-import { LogOut, UserIcon } from "lucide-react";
+import { LogOut, Monitor, Moon, Sun, UserIcon, Check } from "lucide-react";
 import { logout } from "@/app/(auth)/action";
 import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 
 interface UserButtonProps {
   className?: string;
@@ -21,6 +25,8 @@ interface UserButtonProps {
 
 export default function UserButton({ className }: UserButtonProps) {
   const { user } = useSession();
+
+  const { theme, setTheme } = useTheme();
 
   return (
     <DropdownMenu>
@@ -34,16 +40,36 @@ export default function UserButton({ className }: UserButtonProps) {
         <DropdownMenuSeparator />
         <Link href={`/users/${user.username}`}>
           <DropdownMenuItem className="cursor-pointer">
-            <UserIcon className="mr-2 size-4" /> Profile
+            <UserIcon className="mr-2" size={16} /> Profile
           </DropdownMenuItem>
         </Link>
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>
+            <Monitor className="mr-2" size={16} /> Theme
+          </DropdownMenuSubTrigger>
+          <DropdownMenuSubContent>
+            <DropdownMenuItem onClick={() => setTheme("system")}>
+              <Monitor className="mr-2" size={16} /> System Default
+              {theme === "system" && <Check className="ml-2" size={16} />}
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setTheme("light")}>
+              <Sun className="mr-2" size={16} /> Light
+              {theme === "light" && <Check className="ml-2" size={16} />}
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setTheme("dark")}>
+              <Moon className="mr-2" size={16} /> Dark
+              {theme === "dark" && <Check className="ml-2" size={16} />}
+            </DropdownMenuItem>
+          </DropdownMenuSubContent>
+        </DropdownMenuSub>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={() => {
             logout();
-          }} className="cursor-pointer"
+          }}
+          className="cursor-pointer"
         >
-          <LogOut className="mr-2 size-4" /> Logout
+          <LogOut className="mr-2" size={16} /> Logout
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
