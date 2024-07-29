@@ -7,6 +7,7 @@ import { submitPost } from "./action";
 import UserAvatar from "@/components/UserAvatar";
 import { useSession } from "@/app/(main)/SessionProvider";
 import { Button } from "@/components/ui/button";
+import "./style.css";
 
 export default function PostEditor() {
   const { user } = useSession();
@@ -18,7 +19,7 @@ export default function PostEditor() {
         italic: false,
       }),
       Placeholder.configure({
-        placeholder: "What's crack-a-lackin'?",
+        placeholder: "What's going on?",
       }),
     ],
   });
