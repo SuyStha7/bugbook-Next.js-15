@@ -45,7 +45,7 @@ async function WhoToFollow() {
           >
             <UserAvatar avatarUrl={user.avatarUrl} className="flex-none" />
             <div>
-              <p className="line-clamp-1 break-all font-semibold hover:underline">
+              <p className="captitalize line-clamp-1 break-all font-semibold hover:underline">
                 {user.displayName}
               </p>
               <p className="line-clamp-1 break-all text-muted-foreground">
@@ -67,7 +67,7 @@ const getTrendingTopics = unstable_cache(
         FROM posts
         GROUP BY (hashtag)
         ORDER BY count DESC, hashtag ASC
-        LIMIT 5;
+        LIMIT 8;
         `;
 
     return result.map((row) => ({
