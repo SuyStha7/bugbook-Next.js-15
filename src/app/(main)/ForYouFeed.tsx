@@ -1,6 +1,7 @@
 "use client";
 
 import InfiniteScrollContainer from "@/components/InfiniteScrollerContainer";
+import DeletePostDialog from "@/components/posts/DeletePostDialog";
 import Post from "@/components/posts/Post";
 import PostsLoadingSkeleton from "@/components/posts/PostsLoadingSkeleton";
 import kyInstance from "@/lib/ky";
