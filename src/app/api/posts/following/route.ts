@@ -6,8 +6,7 @@ import { NextRequest } from "next/server";
 export async function GET(req: NextRequest) {
   try {
     const cursor = req.nextUrl.searchParams.get("cursor") || undefined;
-
-    const pageSize = 8;
+    const pageSize = 5;
 
     const { user } = await validateRequest();
 
@@ -16,6 +15,15 @@ export async function GET(req: NextRequest) {
     }
 
     const posts = await prisma.post.findMany({
+      where: {
+        user: {
+          followers: {
+            some: {
+              followerId: user.id,
+            },
+          },
+        },
+      },
       include: getPostDataInclude(user.id),
       orderBy: { createdAt: "desc" },
       take: pageSize + 1,

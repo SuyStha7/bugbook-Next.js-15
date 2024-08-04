@@ -8,10 +8,10 @@ interface MenuBarProps {
 
 export default function MenuBar({ className }: MenuBarProps) {
   return (
-    <div className={className}>
+    <div className={`${className} bg-white dark:bg-card dark:text-white text-black`}>
       <Button
         variant="ghost"
-        className="flex items-center justify-start gap-3"
+        className="flex items-center justify-start gap-3 text-current"
         title="Home"
         asChild
       >
@@ -22,7 +22,7 @@ export default function MenuBar({ className }: MenuBarProps) {
       </Button>
       <Button
         variant="ghost"
-        className="flex items-center justify-start gap-3"
+        className="flex items-center justify-start gap-3 text-current"
         title="Notifications"
         asChild
       >
@@ -33,7 +33,7 @@ export default function MenuBar({ className }: MenuBarProps) {
       </Button>
       <Button
         variant="ghost"
-        className="flex items-center justify-start gap-3"
+        className="flex items-center justify-start gap-3 text-current"
         title="Messages"
         asChild
       >
@@ -44,7 +44,7 @@ export default function MenuBar({ className }: MenuBarProps) {
       </Button>
       <Button
         variant="ghost"
-        className="flex items-center justify-start gap-3"
+        className="flex items-center justify-start gap-3 text-current"
         title="Bookmarks"
         asChild
       >

@@ -29,7 +29,7 @@ export default function UserButton({ className }: UserButtonProps) {
 
   const { theme, setTheme } = useTheme();
 
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
   return (
     <DropdownMenu>
@@ -68,7 +68,7 @@ export default function UserButton({ className }: UserButtonProps) {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={() => {
-            queryClient.clear()
+            queryClient.clear();
             logout();
           }}
           className="cursor-pointer"
