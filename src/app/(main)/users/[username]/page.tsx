@@ -7,11 +7,12 @@ import UserAvatar from "@/components/UserAvatar";
 import prisma from "@/lib/prisma";
 import { getUserDataSelect, UserData } from "@/lib/types";
 import { FollowerInfo, formatNumber } from "@/lib/utils";
-import { formatDate } from "date-fns";
+import { format } from "date-fns";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import UserPostFeed from "./UserPostFeed";
+import Linkify from "@/components/Linkify";
 
 interface PageProps {
   params: { username: string };
@@ -42,7 +43,7 @@ export async function generateMetadata({
   const user = await getUser(username, loggedInUser.id);
 
   return {
-    title: `${user.displayName}  (@${user.username})`,
+    title: `${user.displayName} (@${user.username})`,
   };
 }
 
@@ -102,7 +103,7 @@ async function UserProfile({ user, loggedInUserId }: UserProfileProps) {
             </h1>
             <div className="text-muted-foreground">@{user.username}</div>
           </div>
-          <div>Member since {formatDate(user.createdAt, "MMM d, yyyy")}</div>
+          <div>Member since {format(user.createdAt, "MMM d, yyyy")}</div>
           <div className="flex items-center gap-3">
             <span className="">
               Posts:{" "}
@@ -122,9 +123,12 @@ async function UserProfile({ user, loggedInUserId }: UserProfileProps) {
       {user.bio && (
         <>
           <hr />
-          <div className="overflow-hidden whitespace-pre-line break-words">
-            {user.bio}
-          </div>
+          <Linkify>
+            {" "}
+            <div className="overflow-hidden whitespace-pre-line break-words">
+              {user.bio}
+            </div>
+          </Linkify>
         </>
       )}
     </div>
