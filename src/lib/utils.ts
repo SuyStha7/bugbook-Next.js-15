@@ -25,3 +25,8 @@ export function formatNumber(n: number):string{
     maximumFractionDigits: 1,
   }).format(n)
 }
+
+export interface FollowerInfo{
+  followers: number,
+  isFollowedByUser: boolean
+}

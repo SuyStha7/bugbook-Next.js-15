@@ -1,6 +1,5 @@
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
-import { userDataSelect } from "@/lib/types";
 import { Loader2 } from "lucide-react";
 import { Suspense } from "react";
 import UserAvatar from "./UserAvatar";
@@ -8,6 +7,8 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { unstable_cache } from "next/cache";
 import { formatNumber } from "@/lib/utils";
+import FollowButton from "./FollowButton";
+import { getUserDataSelect } from "@/lib/types";
 
 export default function TrendSidebar() {
   return (
@@ -29,8 +30,13 @@ async function WhoToFollow() {
       NOT: {
         id: user.id,
       },
+      followers: {
+        none: {
+          followerId: user.id,
+        },
+      },
     },
-    select: userDataSelect,
+    select: getUserDataSelect(user.id),
     take: 5,
   });
 
@@ -45,7 +51,7 @@ async function WhoToFollow() {
           >
             <UserAvatar avatarUrl={user.avatarUrl} className="flex-none" />
             <div>
-              <p className="capitalize line-clamp-1 break-all font-semibold hover:underline">
+              <p className="line-clamp-1 break-all font-semibold capitalize hover:underline">
                 {user.displayName}
               </p>
               <p className="line-clamp-1 break-all text-muted-foreground">
@@ -53,7 +59,15 @@ async function WhoToFollow() {
               </p>
             </div>
           </Link>
-          <Button>Follow</Button>
+          <FollowButton
+            userId={user.id}
+            initialState={{
+              followers: user._count.followers,
+              isFollowedByUser: user.followers.some(
+                ({ followerId }) => followerId === user.id,
+              ),
+            }}
+          />
         </div>
       ))}
     </div>
@@ -67,7 +81,7 @@ const getTrendingTopics = unstable_cache(
         FROM posts
         GROUP BY (hashtag)
         ORDER BY count DESC, hashtag ASC
-        LIMIT 8;
+        LIMIT 5;
         `;
 
     return result.map((row) => ({

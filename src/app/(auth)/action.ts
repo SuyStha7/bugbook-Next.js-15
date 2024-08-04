@@ -19,17 +19,17 @@ export async function logout() {
     // Create a blank session cookie to clear the current session cookie
     const sessionCookie = lucia.createBlankSessionCookie();
 
-    // Set the cookie to effectively log out the user
-    cookies().set(sessionCookie.name, sessionCookie.value, {
-      ...sessionCookie.attributes,
-      maxAge: 0, // Set maxAge to 0 to ensure the cookie is deleted
-    });
+    // Set the session cookie
+    cookies().set(
+      sessionCookie.name,
+      sessionCookie.value,
+      sessionCookie.attributes,
+    );
 
     // Redirect the user to the login page
     return redirect("/login");
   } catch (error) {
-    // Handle any errors that occur during the logout process
-    console.error("Logout error:", error);
-    throw new Error("Logout failed");
+    console.error(error)
+    throw new Error("error");
   }
 }
