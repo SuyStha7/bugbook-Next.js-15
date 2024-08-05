@@ -15,7 +15,7 @@ export default function Page() {
         <div className="w-full space-y-10 overflow-y-auto p-10 md:w-1/2">
           <div className="space-y-1 text-center">
             <h1 className="text-3xl font-bold">
-              Sign up to <span className="text-violet-700">bugbook</span>
+              Sign up to <span className="text-green-500">bugbook</span>
             </h1>
             <p className="text-muted-foreground">
               A place where even <span className="italic">you</span> can find a
