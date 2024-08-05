@@ -2,7 +2,6 @@ import { validateRequest } from "@/auth";
 import FollowButton from "@/components/FollowButton";
 import FollowerCount from "@/components/FollowerCount";
 import TrendSidebar from "@/components/TrendSidebar";
-import { Button } from "@/components/ui/button";
 import UserAvatar from "@/components/UserAvatar";
 import prisma from "@/lib/prisma";
 import { getUserDataSelect, UserData } from "@/lib/types";
@@ -13,6 +12,7 @@ import { notFound } from "next/navigation";
 import { cache } from "react";
 import UserPostFeed from "./UserPostFeed";
 import Linkify from "@/components/Linkify";
+import EditProfileButton from "./EditProfileButton";
 
 interface PageProps {
   params: { username: string };
@@ -115,7 +115,7 @@ async function UserProfile({ user, loggedInUserId }: UserProfileProps) {
           </div>
         </div>
         {user.id === loggedInUserId ? (
-          <Button>Edit profile</Button>
+          <EditProfileButton user={user}/>
         ) : (
           <FollowButton userId={user.id} initialState={followerInfo} />
         )}
