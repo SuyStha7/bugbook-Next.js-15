@@ -79,8 +79,7 @@ export default function EditProfileDialog({
         <DialogHeader>
           <DialogTitle>Edit profile</DialogTitle>
         </DialogHeader>
-        <div className="space-y-1.5">
-          <Label>Avatar</Label>
+        <div className="space-y-1.5 flex items-center justify-center">
           <AvatarInput
             src={
               croppedAvatar

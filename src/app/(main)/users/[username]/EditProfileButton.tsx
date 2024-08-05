@@ -16,7 +16,7 @@ export default function EditProfileButton({ user }: EditProfileButtonProps) {
     <>
       <Button
         variant="outline"
-        className="text-black"
+        className="text-black dark:text-white"
         onClick={() => setShowDialog(true)}
       >
         Edit profile
