@@ -27,5 +27,5 @@ export async function deletePost(id: string) {
     include: getPostDataInclude(user.id),
   });
 
-  return deletedPost
+  return deletedPost;
 }
